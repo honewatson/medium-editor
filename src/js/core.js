@@ -372,6 +372,7 @@
         this.subscribe('editableKeydownTab', handleTabKeydown.bind(this));
 
         // Bind keys which can create or destroy a block element: backspace, delete, return
+        // These callbacks create the p tags when the user deletes or enters the content
         this.subscribe('editableKeydownDelete', handleBlockDeleteKeydowns.bind(this));
         this.subscribe('editableKeydownEnter', handleBlockDeleteKeydowns.bind(this));
 
