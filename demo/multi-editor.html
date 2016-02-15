@@ -32,17 +32,40 @@
             <h2>Non editable Div</h2>
             <p>This text is another paragraph is a normal div.</p>
         </div>
-
+        <h1 class="editable-no-paragrahs">Title</h1>
     </div>
 
     <script src="../dist/js/medium-editor.js"></script>
     <script>
+        var noPs = MediumEditor.Extension.extend(
+        {
+            name: 'no-paragraphs',
+            init: function()
+            {
+                this.base.unsubscribe('editableKeydownDelete',
+                    this.base.handleBlockDeleteKeydowns);
+                this.base.unsubscribe('editableKeydownEnter',
+                    this.base.handleBlockDeleteKeydowns);
+
+            },
+
+        });    
         var editor = new MediumEditor('.editable'),
             editor2 = new MediumEditor('.secondEditable', {
                 toolbar: {
                     buttons: ['bold', 'italic', 'quote', 'pre']
                 }
-            });
+            }),
+        editor_no_paragraphs = new MediumEditor('.editable-no-paragrahs',
+            {
+                extensions:
+                {
+                    "no-paragraphs": new noPs()
+                },
+
+                disableReturn: true
+            })
+        ;
     </script>
 
 </body>
